@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{tytul}}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/bootstrap.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/style.css')}}">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row content">
+                <div class="col-sm-3 sidenav">
+                    <h2 style="text-align: center">
+                        <span class="glyphicon glyphicon-option-vertical" style="color: #DF691A"></span> 
+                            <a href="/" style="color: #EBEBEB">BLOGSTER </a>
+                        <span class="glyphicon glyphicon-option-vertical" style="color: #DF691A"></span></h2>
+                    <hr>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li id="main"><a href="/"><span class="glyphicon glyphicon-home"></span> Najnowsze posty</a></li>
+                        <li id="info"><a href="/info"><span class="glyphicon glyphicon-info-sign"></span> Informacje o blogu | Kontakt</a></li>
+                        {% if current_user.is_authenticated %}
+                            <li id="panel"><a href="/panel"><span class="glyphicon glyphicon-cog"></span> Panel administracyjny</a></li>
+                        {% endif %}
+                        {% if not current_user.is_authenticated %}
+                            <br>
+                            <li id="logowanie"><a href="/logowanie"><span class="glyphicon glyphicon-log-in"></span> Zaloguj się!</a></li>
+                        {% endif %}
+                        {% if current_user.is_authenticated %}
+                            <br>
+                            <li id="logout"><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Wyloguj się!</a></li>
+                        {% endif %}
+                        {% if not current_user.is_authenticated %}
+                            <li id="rejestracja"><a href="/rejestracja"><span class="glyphicon glyphicon-user"></span> Zarejestruj się!</a></li>
+                        {% endif %}
+                    </ul>
+                    <hr>
+                </div>
+
+                <div class="col-sm-9">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <footer class="container-fluid text-center">
+            <p><span class="glyphicon glyphicon-copyright-mark" style="color: #DF691A"></span> Patryk Siudak | <a href="/prywatnosc">Polityka prywatności</a></p>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    </body>
+</html>

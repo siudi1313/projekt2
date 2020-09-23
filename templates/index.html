@@ -1,0 +1,18 @@
+{% extends "baza.html" %}
+
+{% block content %}
+    <h2>Najnowsze posty</h2>
+    <hr>
+
+    {% for post in posty %}
+        <h4>{{post["tytul"]}}</h4>
+        <h5><span class="glyphicon glyphicon-time" style="color: #DF691A"></span> {{post["data_publikacji"]}}, {{post["autor"]}}</h5>
+        <p>{{post["tresc"]}}</p>
+        <hr>
+    {% endfor %}
+
+    <script>
+        var node = document.getElementById("main");
+        node.setAttribute("class", "active");
+    </script>
+{% endblock %}

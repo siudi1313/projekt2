@@ -1,0 +1,32 @@
+{% extends "baza.html" %}
+
+{% block content %}
+    <h2>Formularz rejestracji</h2>
+    <hr>
+
+    <form action="{{url_for('addUser')}}" method="POST">
+        <div class="form-group">
+            <label for="naz">Imie i nazwisko:</label>
+            <input type="text" class="form-control" id="naz" name="nazwa" placeholder="Twoje imię i nazwisko" required>
+        </div>
+        <div class="form-group">
+                <label for="ema">E-mail</label>
+                <input type="email" class="form-control" id="ema" name="email" placeholder="Twój adres e-mail" required>
+        </div>
+        <div class="form-group">
+            <label for="log">Login:</label>
+            <input type="text" class="form-control" id="log" name="login" placeholder="Twój login" required>
+        </div>
+        <div class="form-group">
+            <label for="has">Hasło:</label>
+            <input type="password" class="form-control" id="has" name="haslo" placeholder="Twoje hasło" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Zarejestruj się!</button>
+    </form>
+    <hr>
+
+    <script>
+        var node = document.getElementById("rejestracja");
+        node.setAttribute("class", "active");
+    </script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "baza.html" %}
+
+{% block content %}
+    <h2>Panel administracyjny</h2>
+    <hr>
+
+    <form action="{{url_for('addPost')}}" method="POST">
+        <div class="form-group">
+            <label for="tyt">Tytuł</label>
+            <input type="text" class="form-control" id="tyt" name="tytul" placeholder="Tytuł posta" required>
+        </div>
+        <div class="form-group">
+            <label for="tre">Treść</label>
+            <textarea class="form-control" rows="4" id="tre" name="tresc" placeholder="Treść posta" required></textarea>
+        </div>
+        <input type="hidden" name="autor" value="{{current_user.name}}">
+        <button type="submit" class="btn btn-primary">Opublikuj post!</button>
+        <hr>
+    </form>
+
+    <br>
+    <h3>Posty</h3>
+    <hr>
+
+    {% for post in posty %}
+        <h4>{{post["tytul"]}}</h4>
+        <h5><span class="glyphicon glyphicon-time" style="color: #DF691A"></span> {{post["data_publikacji"]}}, {{post["autor"]}}</h5>
+        <form action="{{url_for('delPost')}}" method="POST">
+            <input type="hidden" name="id" value="{{post['id']}}">
+            <button type="submit" class="btn btn-danger">Usuń post!</button>
+        </form>
+        <hr>
+    {% endfor %}
+
+    <br>
+    <h3>Użytkownicy</h3>
+    <hr>
+
+    {% for uzytkownik in uzytkownicy %}
+        <h4>{{uzytkownik["nazwa"]}}</h4>
+        <h5>Login: {{uzytkownik["login"]}}</h5>
+        <form action="{{url_for('delUser')}}" method="POST">
+            <input type="hidden" name="id" value="{{uzytkownik['id']}}">
+            <button type="submit" class="btn btn-danger">Usuń użytkownika!</button>
+        </form>
+        <hr>
+    {% endfor %}
+
+    <script>
+        var node = document.getElementById("panel");
+        node.setAttribute("class", "active");
+    </script>
+{% endblock %}
